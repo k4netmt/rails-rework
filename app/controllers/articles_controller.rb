@@ -4,8 +4,9 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.all
+    @articles = Article.search(params[:search])
     @markdown= Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+    #@markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
   end
 
   # GET /articles/1

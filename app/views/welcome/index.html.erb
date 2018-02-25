@@ -1,2 +1,24 @@
-<h1>Welcome to Kanet Tran's blog</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+  <p id="notice"><%= notice %></p>
+  <div class="container">
+  	<h1>Kanet Tran's Articles</h1>
+  	<h3>My First Application</h3>
+
+  	<%= form_tag(articles_path, :method => 'get', id:"search-form") do %>
+
+
+  	<p>
+  		<%= text_field_tag :search, params[:search], :class=>'search-query' %>
+  		<%= submit_tag "Search", :name=>nil %>
+  	</p>
+  	<% end %>
+  	<%= link_to 'New Article', new_article_path,
+  			class:'btn btn-primary'%>
+  	<%= render @articles %>
+  	<br>
+ 
+  			
+  		
+  </div>
+
+
+

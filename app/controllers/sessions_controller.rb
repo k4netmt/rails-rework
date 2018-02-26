@@ -18,7 +18,6 @@ class SessionsController < ApplicationController
         redirect_to "/home"
       else
        redirect_to session[:nexturl]
-       
      end
    else
     flash[:danger] = "Invalid email/password combination"

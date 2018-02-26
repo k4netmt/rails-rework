@@ -1,30 +1,31 @@
 <p id="notice"><%= notice %></p>
-
-<div class="card">
-  <div class="card-block">
-    <h4 class="card-title text-info"><%= @article.title %></h4>
-    <p class="card-text"><%= @markdown.render(@article.body).html_safe %> </p>
+<div class="container">
+  <div class="card border-0">
+    <div class="card-block m-1">
+      <h4 class="card-title text-info"><%= @article.title %></h4>
+      <p class="card-text"><%= @markdown.render(@article.body).html_safe %> </p>
+    </div>
   </div>
+
+ <%= link_to 'Edit', edit_article_path(@article), class:'btn btn-secondary' %> |
+  <%= link_to 'Back', "/home" %>
+  <p class="text-primary"><%= "#{@article.comments.length} comment"%></p>
+  <%= render @article.comments %>
+
+  <h2>Add a comment:</h2>
+  <%= form_with(model: [ @article, @article.comments.build ], local: true) do |form| %>
+  <p>
+    <%= form.label :commenter %><br>
+    <%= form.text_field :commenter %>
+  </p>
+  <p>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+  <% end %>
+
+ 
 </div>
-
-
-<h2>Comments</h2>
-<%= render @article.comments %>
-
-<h2>Add a comment:</h2>
-<%= form_with(model: [ @article, @article.comments.build ], local: true) do |form| %>
-<p>
-  <%= form.label :commenter %><br>
-  <%= form.text_field :commenter %>
-</p>
-<p>
-  <%= form.label :body %><br>
-  <%= form.text_area :body %>
-</p>
-<p>
-  <%= form.submit %>
-</p>
-<% end %>
-
-<%= link_to 'Edit', edit_article_path(@article) %> |
-<%= link_to 'Back', articles_path %>

@@ -1,14 +1,12 @@
-  <div class="card">
-    <strong>Commenter: <%= comment.commenter %> </strong>
-  </p>
-  <p>
-    <strong>Comment:</strong>
-    <%= comment.body %>
-  </p>
+  <div class="card mt-1 p-1">
+    <p> <span class="mr-1"><strong><%= comment.commenter %>:
+    </strong></span>
+    <%= comment.body %> </p>
+
   <p>
     <%= link_to 'Delete', [comment.article, comment],
     method: :delete,
     data: { confirm: 'Are you sure?' },
-    class:'btn btn-warning' %>
+    class:'btn btn-link btn-sm' %>
   </p>
 </div>

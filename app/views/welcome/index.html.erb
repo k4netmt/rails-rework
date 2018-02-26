@@ -1,24 +1,43 @@
-  <p id="notice"><%= notice %></p>
-  <div class="container">
-  	<h1>Kanet Tran's Articles</h1>
-  	<h3>My First Application</h3>
+<div class="jumbotron text-center">
+	<h1>Welcome to Kanet Tran's blog</h1>
+	<div class="navbar">
+		<nav class="navbar navbar-expand-sm bg-light navbar-light">
+			<ul class="navbar-nav">
+				<li class="nav-item active">
+					<a class="nav-link" href="/home">Home</a>
+				</li>
+				<% if current_user.nil? %>
+				<li class="nav-item">
+					<a class="nav-link" href="/login">Login</a>
+				</li>
+				<% else %>
+				<li class="nav-item">
+					<!-- <a class="nav-link" href="/logout">Logout</a> -->
+					<%= link_to "Logout", logout_path, method: :delete,
+					class:"nav-link"%>
+				</li>
+				<% end %>
 
-  	<%= form_tag(articles_path, :method => 'get', id:"search-form") do %>
+			</ul>
+		</nav>
+	</div>
+</div>
+
+<div class="container">
+
+	<%= form_tag(articles_path, :method => 'get', id:"search-form") do %>
 
 
-  	<p>
-  		<%= text_field_tag :search, params[:search], :class=>'search-query' %>
-  		<%= submit_tag "Search", :name=>nil %>
-  	</p>
-  	<% end %>
-  	<%= link_to 'New Article', new_article_path,
-  			class:'btn btn-primary'%>
-  	<%= render @articles %>
-  	<br>
- 
-  			
-  		
-  </div>
+	<p>
+		<%= text_field_tag :search, params[:search], :class=>'search-query' %>
+		<%= submit_tag "Search", :name=>nil %>
+	</p>
+	<% end %>
+	<%= link_to 'New Article', new_article_path,
+	class:'btn btn-primary'%>
+	<%= render @articles %>
+	<br>
 
 
 
+</div>

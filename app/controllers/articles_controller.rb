@@ -1,6 +1,15 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  protect_from_forgery with: :exception
+  include SessionsHelper
+  
+  before_action :require_login,only:[:new,:create,:edit,:destroy]
 
+  def require_login
+    unless logged_in?
+      redirect_to login_path
+    end
+  end
   # GET /articles
   # GET /articles.json
   def index
@@ -12,16 +21,20 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
-     @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
-  end
+   @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+ end
 
   # GET /articles/new
   def new
+    @session[:nexturl]='article/new'
     @article = Article.new
   end
 
   # GET /articles/1/edit
   def edit
+  end
+
+  def delete
   end
 
   # POST /articles
@@ -74,4 +87,4 @@ class ArticlesController < ApplicationController
     def article_params
       params.require(:article).permit(:title, :body)
     end
-end
+  end

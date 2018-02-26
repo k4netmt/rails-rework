@@ -4,9 +4,11 @@
     <%= comment.body %> </p>
 
   <p>
+    <% if comment.commenter==current_user.name %>
     <%= link_to 'Delete', [comment.article, comment],
     method: :delete,
     data: { confirm: 'Are you sure?' },
     class:'btn btn-link btn-sm' %>
+    <% end %>
   </p>
 </div>

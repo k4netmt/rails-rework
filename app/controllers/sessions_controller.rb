@@ -4,24 +4,33 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-  	session.delete :user_id
+    log_out
+    flash[:success] = "You are logged out"
+    redirect_to root_path
   end
 
   def create
     user = User.find_by name: params[:session][:name].downcase
+     @url =params[:url]
+        logger.debug "URL #{@url}"
     if user && user.authenticate(params[:session][:password])
       #TODO save user infor into session
       flash[:success] = "Login success"
       log_in user
       logger.debug session
-      if session[:nexturl].nil?
-        redirect_to "/home"
+      if params[:url].nil? 
+        # @url =params[:url]
+        # logger.debug "URL #{@url}"
+        redirect_to '/home'
       else
-       redirect_to session[:nexturl]
-     end
-   else
-    flash[:danger] = "Invalid email/password combination"
-    render :new
+        # @url =params[:url]
+        # logger.debug "URL #{@url}"
+        redirect_to @url
+      end
+      
+    else
+      flash[:danger] = "Invalid email/password combination"
+      render :new
+    end
   end
-end
 end

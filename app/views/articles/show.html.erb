@@ -7,16 +7,20 @@
     </div>
   </div>
 
- <%= link_to 'Edit', edit_article_path(@article), class:'btn btn-secondary' %> |
+  <%= link_to 'Edit', edit_article_path(@article), class:'btn btn-secondary' %> |
   <%= link_to 'Back', "/home" %>
   <p class="text-primary"><%= "#{@article.comments.length} comment"%></p>
   <%= render @article.comments %>
 
+  <% if current_user.nil? %>
+  <%= link_to 'Login to leave comment', login_path(:url => "/articles/#{@article.id}"), class:'btn btn-secondary' %> 
+  
+  <% else %>
   <h2>Add a comment:</h2>
   <%= form_with(model: [ @article, @article.comments.build ], local: true) do |form| %>
   <p>
     <%= form.label :commenter %><br>
-    <%= form.text_field :commenter %>
+    <%= form.text_field :commenter, value: @current_user.name %>
   </p>
   <p>
     <%= form.label :body %><br>
@@ -26,6 +30,9 @@
     <%= form.submit %>
   </p>
   <% end %>
+  
+  
+  <% end %>
 
- 
+
 </div>

@@ -7,7 +7,7 @@ class ArticlesController < ApplicationController
 
   def require_login
     unless logged_in?
-      redirect_to login_path
+      redirect_to login_path(:url=>"/articles/new")
     end
   end
   # GET /articles
@@ -26,7 +26,6 @@ class ArticlesController < ApplicationController
 
   # GET /articles/new
   def new
-    @session[:nexturl]='article/new'
     @article = Article.new
   end
 

@@ -11,17 +11,19 @@
     </div>
   <% end %>
 
-  <div class="field">
+
+  <div class="field" >
     <%= form.label :title %>
-    <%= form.text_field :title, id: :article_title %>
+    <%= form.text_field :title, id: :article_title, class: 'form-control' %>
   </div>
 
+  
   <div class="field">
-    <%= form.label :body %>
-    <%= form.text_area :body, id: :article_body %>
+  <%= form.label :body %>
+    <%= form.text_area :body, id: :article_body, class: 'form-control' %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="mt-2">
+    <%= form.submit class: "btn btn-primary mb-2" %>
   </div>
 <% end %>

@@ -1,5 +1,7 @@
-<p id="notice"><%= notice %></p>
+<%= render "welcome/header" %>
+
 <div class="container">
+  <p id="notice"><%= notice %></p>
   <div class="card border-0">
     <div class="card-block m-1">
       <h4 class="card-title text-info"><%= @article.title %></h4>
@@ -7,16 +9,17 @@
     </div>
   </div>
 
-  <%= link_to 'Edit', edit_article_path(@article), class:'btn btn-secondary' %> |
-  <%= link_to 'Back', "/home" %>
-  <p class="text-primary"><%= "#{@article.comments.length} comment"%></p>
+  <%= link_to 'Edit', edit_article_path(@article), class:'btn btn-secondary' %>
+  <p class="text-primary mt-1"><%= "#{@article.comments.length} comment"%></p>
   <%= render @article.comments %>
 
   <% if current_user.nil? %>
   <%= link_to 'Login to leave comment', login_path(:url => "/articles/#{@article.id}"), class:'btn btn-secondary' %> 
   
   <% else %>
-  <h2>Add a comment:</h2>
+
+  <div class="card-block m-1">
+  <h4>Add a comment:</h4>
   <%= form_with(model: [ @article, @article.comments.build ], local: true) do |form| %>
   <p>
     <%= form.label :commenter %><br>
@@ -27,10 +30,10 @@
     <%= form.text_area :body %>
   </p>
   <p>
-    <%= form.submit %>
+    <%= form.submit class: "btn btn-primary mb-2" %>
   </p>
   <% end %>
-  
+  </div>
   
   <% end %>
 

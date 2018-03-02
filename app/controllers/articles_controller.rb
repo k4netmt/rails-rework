@@ -87,7 +87,6 @@ class ArticlesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_article
       @article = Article.find(params[:id])
-      byebug 
       @author = User.find(@article.users_id)
     end
 

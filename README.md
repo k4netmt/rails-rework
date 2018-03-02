@@ -1,24 +1,13 @@
 # README
+This website heroku: https://rails-prework.herokuapp.com
+Spent time: 15 hours
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* [x]  Smart Log in/out functionality
+* [x] Responsive Navigation
+* [x] Markdown support for formatting text
+* [x] Search form to query the database 
+* [x] Article Creation
+* [x] Comment Creation
+* [x] Deploy Heroku
+* [x] Work with Postrage database
+* ![Video Walkthrough] (https://github.com/k4netmt/rails-rework/blob/master/walk_railsprework.gif)

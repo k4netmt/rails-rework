@@ -15,6 +15,8 @@ class ArticlesController < ApplicationController
   def index
     @articles = Article.search(params[:search])
     @markdown= Redcarpet::Markdown.new(Redcarpet::Render::HTML)
+    byebug
+    @author = User.find(article.users_id)
     #@markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML)
   end
 
@@ -39,17 +41,21 @@ class ArticlesController < ApplicationController
   # POST /articles
   # POST /articles.json
   def create
-    @article = Article.new(article_params)
+    #@article = Article.new(article_params)
+    @user=User.find(current_user.id)
+    @article=@user.articles.create(article_params)
+    #@article.users_id=@user.id
 
-    respond_to do |format|
-      if @article.save
-        format.html { redirect_to @article, notice: 'Article was successfully created.' }
-        format.json { render :show, status: :created, location: @article }
-      else
-        format.html { render :new }
-        format.json { render json: @article.errors, status: :unprocessable_entity }
-      end
-    end
+    redirect_to root_path
+    # respond_to do |format|
+    #   if @article.save
+    #     format.html { redirect_to @article, notice: 'Article was successfully created.' }
+    #     format.json { render :show, status: :created, location: @article }
+    #   else
+    #     format.html { render :new }
+    #     format.json { render json: @article.errors, status: :unprocessable_entity }
+    #   end
+    # end
   end
 
   # PATCH/PUT /articles/1
@@ -71,15 +77,18 @@ class ArticlesController < ApplicationController
   def destroy
     @article.destroy
     respond_to do |format|
-      format.html { redirect_to articles_url, notice: 'Article was successfully destroyed.' }
+      format.html { redirect_to root_path, notice: 'Article was successfully destroyed.' }
       format.json { head :no_content }
     end
+
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_article
       @article = Article.find(params[:id])
+      byebug 
+      @author = User.find(@article.users_id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

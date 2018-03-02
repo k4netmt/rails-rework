@@ -1,0 +1,11 @@
+<%= render "welcome/header" %>
+<div class="container">
+	<div class="row">
+    <div class="col-3 mt-2">
+      <%= render @user %>
+    </div>
+    <div class="col-9">
+      <%= render @user.articles %>
+    </div>
+	
+</div>

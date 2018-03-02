@@ -1,0 +1,12 @@
+
+    <div class="card">
+      <div class="card-block">
+      	 <div class="card-header"><%= @user.name %></div>
+      	 <div class="card-body">
+      	 	<p class="card-text"><%= "Membersince: #{format_date(@user.created_at)}" %></p>
+        <p class="card-text"><%= "#{@user.articles.length} post" %></p>
+      	 </div>
+        
+      </div>
+
+</div>

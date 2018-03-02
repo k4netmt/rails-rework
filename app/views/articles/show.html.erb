@@ -8,9 +8,13 @@
       <p class="card-text"><%= @markdown.render(@article.body).html_safe %> </p>
     </div>
   </div>
-
-  <%= link_to 'Edit', edit_article_path(@article), class:'btn btn-secondary' %>
+  <% if !current_user.nil? %>
+    <% if current_user.id == @article.users_id %>
+       <%= link_to 'Edit', edit_article_path(@article), class:'btn btn-secondary' %>
   <p class="text-primary mt-1"><%= "#{@article.comments.length} comment"%></p>
+    <% end %>
+  <% end %>
+ 
   <%= render @article.comments %>
 
   <% if current_user.nil? %>

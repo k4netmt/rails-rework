@@ -1,9 +1,17 @@
 class UsersController < ApplicationController
+	include DateTimeHelper
+	
 	def index
+		@articles = Article.all
 	end
 
 	def new
 		@user = User.new
+	end
+
+	def show
+		@user = User.find(params[:id])
+		@markdown= Redcarpet::Markdown.new(Redcarpet::Render::HTML)
 	end
 
 	def create
